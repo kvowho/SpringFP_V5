@@ -2,31 +2,60 @@
 <#import "parts/login.ftl" as l>
 
 <@c.page>
-<div>
-    <@l.logout />
-    <span><a href="/user">User list</a> </span>
-</div>
-<div>
-    <form method="post">
-        <input type="text" name="comment" placeholder="Comment" />
-        <input type="text" name="status" placeholder="Status">
-        <input type="hidden" name="_csrf" value="${_csrf.token}" />
-        <button type="submit">Добавить</button>
-    </form>
-</div>
-<div>Список сообщений</div>
-<form method="get" action="/main">
-    <input type="text" name="filter" value="${filter?ifExists}">
-    <button type="submit">Найти</button>
-</form>
-<#list invoices as invoice>
-<div>
-    <b>${invoice.id}</b>
-    <span>${invoice.comment}</span>
-    <i>${invoice.status}</i>
-    <strong>${invoice.authorName}</strong>
-</div>
-<#else>
-No message
-</#list>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <form method="get" action="/main" class="form-inline">
+                <input type="text" name="filter" class="form-control" value="${filter?ifExists}" placeholder="Search by tag">
+                <button type="submit" class="btn btn-primary ml-2">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Add new Invoice
+    </a>
+    <div class="collapse" id="collapseExample">
+        <div class="form-group mt-3">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="comment" placeholder="Comment" />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="status" placeholder="Status">
+                </div>
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" name="file" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+<div>Invoice list</div>
+
+    <div class="card-columns">
+        <#list invoices as invoice>
+            <div class="card my-3">
+                <div class="card-footer text-muted">
+                    ${invoice.id}
+                </div>
+                <div class="m-2">
+                    <span>${invoice.comment}</span>
+                    <i>${invoice.status}</i>
+                </div>
+                <div class="card-footer text-muted">
+                    ${invoice.authorName}
+                </div>
+            </div>
+        <#else>
+            No message
+        </#list>
+    </div>
 </@c.page>
