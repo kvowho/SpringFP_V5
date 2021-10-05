@@ -1,6 +1,6 @@
-package com.example.sweater.repos;
+package net.voznjuk.fp.repos;
 
-import com.example.sweater.domain.Message;
+import net.voznjuk.fp.domain.Message;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

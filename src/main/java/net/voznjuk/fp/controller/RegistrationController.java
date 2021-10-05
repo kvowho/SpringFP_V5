@@ -1,8 +1,8 @@
-package com.example.sweater.controller;
+package net.voznjuk.fp.controller;
 
-import com.example.sweater.domain.Role;
-import com.example.sweater.domain.User;
-import com.example.sweater.repos.UserRepo;
+import net.voznjuk.fp.domain.Role;
+import net.voznjuk.fp.domain.User;
+import net.voznjuk.fp.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

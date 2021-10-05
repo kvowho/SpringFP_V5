@@ -1,6 +1,6 @@
-package com.example.sweater.service;
+package net.voznjuk.fp.service;
 
-import com.example.sweater.repos.UserRepo;
+import net.voznjuk.fp.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package com.example.sweater.domain;
+package net.voznjuk.fp.domain;
 
 import javax.persistence.*;
 

@@ -1,6 +1,6 @@
-package com.example.sweater.repos;
+package net.voznjuk.fp.repos;
 
-import com.example.sweater.domain.User;
+import net.voznjuk.fp.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepo extends JpaRepository<User, Long> {
