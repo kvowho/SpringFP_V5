@@ -7,8 +7,8 @@
 </div>
 <div>
     <form method="post">
-        <input type="text" name="text" placeholder="Введите сообщение" />
-        <input type="text" name="tag" placeholder="Тэг">
+        <input type="text" name="comment" placeholder="Comment" />
+        <input type="text" name="status" placeholder="Status">
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
         <button type="submit">Добавить</button>
     </form>
@@ -18,12 +18,12 @@
     <input type="text" name="filter" value="${filter}">
     <button type="submit">Найти</button>
 </form>
-<#list messages as message>
+<#list invoices as invoice>
 <div>
-    <b>${message.id}</b>
-    <span>${message.text}</span>
-    <i>${message.tag}</i>
-    <strong>${message.authorName}</strong>
+    <b>${invoice.id}</b>
+    <span>${invoice.comment}</span>
+    <i>${invoice.status}</i>
+    <strong>${invoice.authorName}</strong>
 </div>
 <#else>
 No message

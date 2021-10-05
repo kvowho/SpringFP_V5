@@ -1,7 +1,9 @@
 package net.voznjuk.fp.controller;
 
+import net.voznjuk.fp.domain.Invoice;
 import net.voznjuk.fp.domain.Message;
 import net.voznjuk.fp.domain.User;
+import net.voznjuk.fp.repos.InvoiceRepo;
 import net.voznjuk.fp.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,7 +18,8 @@ import java.util.Map;
 @Controller
 public class MainController {
     @Autowired
-    private MessageRepo messageRepo;
+    //private MessageRepo messageRepo;
+    private InvoiceRepo invoiceRepo;
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
@@ -25,15 +28,16 @@ public class MainController {
 
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Message> messages = messageRepo.findAll();
+        //Iterable<Message> messages = messageRepo.findAll();
+        Iterable<Invoice> invoices = invoiceRepo.findAll();
 
         if (filter != null && !filter.isEmpty()) {
-            messages = messageRepo.findByTag(filter);
+            invoices = invoiceRepo.findByStatus(filter);
         } else {
-            messages = messageRepo.findAll();
+            invoices = invoiceRepo.findAll();
         }
 
-        model.addAttribute("messages", messages);
+        model.addAttribute("invoices", invoices);
         model.addAttribute("filter", filter);
 
         return "main";
@@ -42,16 +46,16 @@ public class MainController {
     @PostMapping("/main")
     public String add(
             @AuthenticationPrincipal User user,
-            @RequestParam String text,
-            @RequestParam String tag, Map<String, Object> model
+            @RequestParam String comment,
+            @RequestParam String status, Map<String, Object> model
     ) {
-        Message message = new Message(text, tag, user);
+        Invoice invoice = new Invoice(comment, status, user);
 
-        messageRepo.save(message);
+        invoiceRepo.save(invoice);
 
-        Iterable<Message> messages = messageRepo.findAll();
+        Iterable<Invoice> invoices = invoiceRepo.findAll();
 
-        model.put("messages", messages);
+        model.put("invoices", invoices);
         model.put("filter", "");
 
         return "main";
